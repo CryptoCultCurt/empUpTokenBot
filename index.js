@@ -23,6 +23,16 @@ for (const file of commandFiles) {
 client.once(Events.ClientReady, async () => {
 	console.log('Ready!'); // 
     try {
+        const GUILD_ID = '1035489655296110592';
+        guild =  client.guilds.cache.get(GUILD_ID).members.cache.find(member => member.id === client.user.id)
+        client.user.setPresence({
+            activities: [{ name: `upEMP Price`, type: ActivityType.Watching }],
+            status: 'active',
+        });
+    } catch {
+    }
+    
+    try {
 
         const GUILD_ID = '930631146100887593';
         guild =  client.guilds.cache.get(GUILD_ID).members.cache.find(member => member.id === client.user.id)
@@ -33,15 +43,7 @@ client.once(Events.ClientReady, async () => {
     } catch {
     }
 
-    try {
-        const GUILD_ID = '1035489655296110592';
-        guild =  client.guilds.cache.get(GUILD_ID).members.cache.find(member => member.id === client.user.id)
-        client.user.setPresence({
-            activities: [{ name: `upEMP Price`, type: ActivityType.Watching }],
-            status: 'active',
-        });
-    } catch {
-    }
+    
     
 });
 
