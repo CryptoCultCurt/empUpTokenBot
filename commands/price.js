@@ -2,7 +2,6 @@ const { SlashCommandBuilder } = require('discord.js');
 const API = process.env.CRYPTO_API || 'https://api.crypto-api.com/api/';
 const axios = require('axios');
 const { Client, Collection, Events, GatewayIntentBits, messageLink, ActivityType } = require('discord.js');
-const { RELAYER_DEFAULT_LOGGER } = require('@walletconnect/client');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 module.exports = {
