@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js');
 const API = process.env.CRYPTO_API || 'https://api.crypto-api.com/api/';
 const axios = require('axios');
 const { Client, Collection, Events, GatewayIntentBits, messageLink, ActivityType } = require('discord.js');
+const { RELAYER_DEFAULT_LOGGER } = require('@walletconnect/client');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 module.exports = {
@@ -14,6 +15,7 @@ module.exports = {
         await axios.get(API + 'up/price/emp').then(res => {
             data = res.data;
             price = formatter.format(toDec18(data.price));
+            console.log(price);
             guild.setNickname(price);
             return interaction.reply(price);
         }).catch(err => { // server down or some other issue with API
