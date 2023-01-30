@@ -15,7 +15,11 @@ module.exports = {
             data = res.data;
             price = formatter.format(toDec18(data.price));
             console.log(price);
-            guild.setNickname(price);
+            client.guilds.cache.map(g => {
+              guild =  client.guilds.cache.get(g.id).members.cache.find(member => member.id === client.user.id);
+              guild.setNickname(price);
+            })
+           // guild.setNickname(price);
             return interaction.reply(price);
         }).catch(err => { // server down or some other issue with API
             return interaction.reply('Sorry, an error has occured.');

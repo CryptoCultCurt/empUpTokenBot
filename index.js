@@ -22,12 +22,17 @@ for (const file of commandFiles) {
 
 client.once(Events.ClientReady, async () => {
 	console.log('Ready!');
-    const GUILD_ID = '1035489655296110592';
-    guild =  client.guilds.cache.get(GUILD_ID).members.cache.find(member => member.id === client.user.id)
+   // const GUILD_ID = '1035489655296110592';
+   client.guilds.cache.map(g => {
+    guild =  client.guilds.cache.get(g.id).members.cache.find(member => member.id === client.user.id);
     client.user.setPresence({
-        activities: [{ name: `empUP Price`, type: ActivityType.Watching }],
-        status: 'active',
-      }); 
+      activities: [{ name: `empUP Price.`, type: ActivityType.Watching }],
+      status: 'active',
+    }); 
+   
+   })
+   // guild =  client.guilds.cache.get(GUILD_ID).members.cache.find(member => member.id === client.user.id)
+    
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -50,8 +55,12 @@ async function updatePrice() {
     await axios.get(API + 'up/price/emp').then(res => {
         data = res.data;
         price = formatter.format(toDec18(data.price));
-        if (guild)
-            guild.setNickname(price);
+        client.guilds.cache.map(g => {
+          guild =  client.guilds.cache.get(g.id).members.cache.find(member => member.id === client.user.id);
+          guild.setNickname(price);
+        })
+        // if (guild)
+        //     guild.setNickname(price);
     })
 }
 
